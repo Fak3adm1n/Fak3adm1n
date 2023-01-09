@@ -1,6 +1,6 @@
 ---
 title: 分类 Category
 date: 2023-01-09 22:45:58
-type: categories
-layout: categories
+type: "categories"
+layout: "categories"
 ---
