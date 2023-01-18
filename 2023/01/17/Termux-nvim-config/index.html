@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Termux：Neovim的安装与初步配置 | Xv4n 的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Termux," />
+  
+
+  <meta name="description" content="安装1apt install neovim git python nodejs  配置在.cinfig&#x2F;下创建nvim文件并在此文件夹下创建init.vim配置文件在nvum文件夹下创建lua文件夹，然后编辑init.vim   1nvim init.vim  把下面的配置输入init.vim   1lua require(&amp;#x27;basic&amp;#x27;)  然后在lua文件夹下创建并编辑ba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Termux：Neovim的安装与初步配置">
+<meta property="og:url" content="http://fak3adm1n.github.io/2023/01/17/Termux-nvim-config/index.html">
+<meta property="og:site_name" content="Xv4n 的博客">
+<meta property="og:description" content="安装1apt install neovim git python nodejs  配置在.cinfig&#x2F;下创建nvim文件并在此文件夹下创建init.vim配置文件在nvum文件夹下创建lua文件夹，然后编辑init.vim   1nvim init.vim  把下面的配置输入init.vim   1lua require(&amp;#x27;basic&amp;#x27;)  然后在lua文件夹下创建并编辑ba">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-17T05:54:30.000Z">
+<meta property="article:modified_time" content="2023-01-18T08:09:42.157Z">
+<meta property="article:author" content="Fak3adm1n">
+<meta property="article:tag" content="Termux">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    
+<link rel="stylesheet" href="/css/personal-style.css">
+
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">配置快捷键</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Termux-nvim-config" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Termux：Neovim的安装与初步配置</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2023.01.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Fak3adm1n</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install neovim git python nodejs</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在<code>.cinfig/</code>下创建<code>nvim</code>文件并在此文件夹下创建<code>init.vim</code>配置文件<br>在<code>nvum</code>文件夹下创建<code>lua</code>文件夹，然后编辑<code>init.vim</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvim init.vim</span><br></pre></td></tr></table></figure>
+
+<p>把下面的配置输入<code>init.vim</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lua require(<span class="string">&#x27;basic&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后在<code>lua</code>文件夹下创建并编辑<code>basic.lua</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvim lua/basic.lua</span><br></pre></td></tr></table></figure>
+
+<p>在<code>basic.lua</code>里输入  </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- utf8</span></span><br><span class="line">vim.g.encoding = <span class="string">&quot;UTF-8&quot;</span></span><br><span class="line">vim.o.fileencoding = <span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line"><span class="comment">-- jk移动时光标下上方保留8行</span></span><br><span class="line">vim.o.scrolloff = <span class="number">8</span></span><br><span class="line">vim.o.sidescrolloff = <span class="number">8</span></span><br><span class="line"><span class="comment">-- 使用相对行号</span></span><br><span class="line">vim.wo.number = <span class="literal">true</span></span><br><span class="line">vim.wo.relativenumber = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 高亮所在行</span></span><br><span class="line">vim.wo.cursorline = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 显示左侧图标指示列</span></span><br><span class="line">vim.wo.signcolumn = <span class="string">&quot;yes&quot;</span></span><br><span class="line"><span class="comment">-- 右侧参考线，超过表示代码太长了，考虑换行</span></span><br><span class="line">vim.wo.colorcolumn = <span class="string">&quot;80&quot;</span></span><br><span class="line"><span class="comment">-- 缩进2个空格等于一个Tab</span></span><br><span class="line">vim.o.tabstop = <span class="number">2</span></span><br><span class="line">vim.bo.tabstop = <span class="number">2</span></span><br><span class="line">vim.o.softtabstop = <span class="number">2</span></span><br><span class="line">vim.o.shiftround = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- &gt;&gt; &lt;&lt; 时移动长度</span></span><br><span class="line">vim.o.shiftwidth = <span class="number">2</span></span><br><span class="line">vim.bo.shiftwidth = <span class="number">2</span></span><br><span class="line"><span class="comment">-- 新行对齐当前行，空格替代tab</span></span><br><span class="line">vim.o.expandtab = <span class="literal">true</span></span><br><span class="line">vim.bo.expandtab = <span class="literal">true</span></span><br><span class="line">vim.o.autoindent = <span class="literal">true</span></span><br><span class="line">vim.bo.autoindent = <span class="literal">true</span></span><br><span class="line">vim.o.smartindent = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 搜索大小写不敏感，除非包含大写</span></span><br><span class="line">vim.o.ignorecase = <span class="literal">true</span></span><br><span class="line">vim.o.smartcase = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 搜索不要高亮</span></span><br><span class="line">vim.o.hlsearch = <span class="literal">false</span></span><br><span class="line"><span class="comment">-- 边输入边搜索</span></span><br><span class="line">vim.o.incsearch = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 使用增强状态栏后不再需要 vim 的模式提示</span></span><br><span class="line">vim.o.showmode = <span class="literal">false</span></span><br><span class="line"><span class="comment">-- 命令行高为2，提供足够的显示空间</span></span><br><span class="line">vim.o.cmdheight = <span class="number">2</span></span><br><span class="line"><span class="comment">-- 当文件被外部程序修改时，自动加载</span></span><br><span class="line">vim.o.autoread = <span class="literal">true</span></span><br><span class="line">vim.bo.autoread = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 禁止折行</span></span><br><span class="line">vim.o.<span class="built_in">wrap</span> = <span class="literal">false</span></span><br><span class="line">vim.wo.<span class="built_in">wrap</span> = <span class="literal">false</span></span><br><span class="line"><span class="comment">-- 行结尾可以跳到下一行</span></span><br><span class="line">vim.o.whichwrap = <span class="string">&#x27;b,s,&lt;,&gt;,[,],h,l&#x27;</span></span><br><span class="line"><span class="comment">-- 允许隐藏被修改过的buffer</span></span><br><span class="line">vim.o.hidden = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 鼠标支持</span></span><br><span class="line">vim.o.mouse = <span class="string">&quot;a&quot;</span></span><br><span class="line"><span class="comment">-- 禁止创建备份文件</span></span><br><span class="line">vim.o.backup = <span class="literal">false</span></span><br><span class="line">vim.o.writebackup = <span class="literal">false</span></span><br><span class="line">vim.o.swapfile = <span class="literal">false</span></span><br><span class="line"><span class="comment">-- smaller updatetime </span></span><br><span class="line">vim.o.updatetime = <span class="number">300</span></span><br><span class="line"><span class="comment">-- 等待mappings</span></span><br><span class="line">vim.o.timeoutlen = <span class="number">100</span></span><br><span class="line"><span class="comment">-- split window 从下边和右边出现</span></span><br><span class="line">vim.o.splitbelow = <span class="literal">true</span></span><br><span class="line">vim.o.splitright = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 自动补全不自动选中</span></span><br><span class="line">vim.g.completeopt = <span class="string">&quot;menu,menuone,noselect,noinsert&quot;</span></span><br><span class="line"><span class="comment">-- 样式</span></span><br><span class="line">vim.o.background = <span class="string">&quot;dark&quot;</span></span><br><span class="line">vim.o.termguicolors = <span class="literal">true</span></span><br><span class="line">vim.opt.termguicolors = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- 不可见字符的显示，这里只把空格显示为一个点</span></span><br><span class="line">vim.o.list = <span class="literal">true</span></span><br><span class="line">vim.o.listchars = <span class="string">&quot;space:·&quot;</span></span><br><span class="line"><span class="comment">-- 补全增强</span></span><br><span class="line">vim.o.wildmenu = <span class="literal">true</span></span><br><span class="line"><span class="comment">-- Dont&#x27; pass messages to |ins-completin menu|</span></span><br><span class="line">vim.o.shortmess = vim.o.shortmess .. <span class="string">&#x27;c&#x27;</span></span><br><span class="line">vim.o.pumheight = <span class="number">10</span></span><br><span class="line"><span class="comment">-- always show tabline</span></span><br><span class="line">vim.o.showtabline = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="配置快捷键"><a href="#配置快捷键" class="headerlink" title="配置快捷键"></a>配置快捷键</h1><p>在<code>init.vim</code>中添加以下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot; 快捷键映射</span><br><span class="line">lua require(&#x27;keybindings&#x27;)</span><br></pre></td></tr></table></figure>
+<p>然后在<code>lua/</code>下创建并编辑<code>keybindings.lua</code></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 保存本地变量</span></span><br><span class="line"><span class="keyword">local</span> map = vim.api.nvim_set_keymap</span><br><span class="line"><span class="keyword">local</span> opt = &#123;noremap = <span class="literal">true</span>, silent = <span class="literal">true</span> &#125;</span><br><span class="line"></span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;A-h&gt;&quot;</span>, <span class="string">&quot;&lt;C-w&gt;h&quot;</span>, opt)</span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;A-j&gt;&quot;</span>, <span class="string">&quot;&lt;C-w&gt;j&quot;</span>, opt)</span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;A-k&gt;&quot;</span>, <span class="string">&quot;&lt;C-w&gt;k&quot;</span>, opt)</span><br><span class="line">map(<span class="string">&quot;n&quot;</span>, <span class="string">&quot;&lt;A-l&gt;&quot;</span>, <span class="string">&quot;&lt;C-w&gt;l&quot;</span>, opt)</span><br></pre></td></tr></table></figure>
+<p>然后保存退出。</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持我</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2023/01/16/Feng-Xiao-7-Tian/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: 'ae8ab40df038dc494f70',
+  clientSecret: '1280c485983b979ec79ac767d023b83b05450d51',
+  repo: 'blog-comments',
+  owner: 'Fak3adm1n',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: md5(location.pathname),
+  admin: ['Fak3adm1n'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
